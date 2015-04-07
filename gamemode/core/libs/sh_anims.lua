@@ -294,13 +294,14 @@ function nut.anim.setModelClass(model, class)
 end
 
 function nut.anim.getModelClass(model)
+	local translatedClass = translations[model:lower()]
 	model = model:lower()
 
-	if (model:find("/player")) then
+	if (model:find("/player") and not translatedClass) then
 		return "player"
 	end
 
-	local class = translations[model:lower()] or "citizen_male"
+	local class = translatedClass or "citizen_male"
 
 	if (class == "citizen_male" and (model:find("female" or model:find("alyx") or model:find("mossman")))) then
 		class = "citizen_female"
